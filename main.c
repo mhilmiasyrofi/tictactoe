@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "board.h"
 
+#define True 1
+
 void welcome() {
    char input[3];
    system("clear");
@@ -51,20 +53,17 @@ int play() {
 
    initBoard(board);
 
-   while (1)
-   {
+   while (True) {
       player = (turn % 2) ? 'o' : 'x';
       system("clear");
       drawBoard(board);
 
-      if (state(board) == 1)
-      {
+      if (state(board) == 1) {
          printf("\nWinner!\n");
          return 0;
       }
 
-      if (state(board) == -1)
-      {
+      if (state(board) == -1) {
          printf("\nDraw!\n");
          return 0;
       }
