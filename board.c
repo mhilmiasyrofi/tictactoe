@@ -81,28 +81,35 @@ int state(char board[3][3]) {
 
    //check colums
    for(col=0; col < 3; col++)
-      if(   (board[col][0] == board[col][1]) &&
-            (board[col][1] == board[col][2]))
-         if(board[col][0] != ' ')
-            return 1; //we have a winner
+      if((board[col][0] == board[col][1]) && (board[col][1] == board[col][2])) {
+         if (board[col][0] == FIRST_MARK)
+            return 1; //first player win
+         if (board[col][0] == SECOND_MARK)
+            return 2; //second player win
+      }
 
    //check rows
    for(row=0; row < 3; row++)
-      if(   (board[0][row] == board[1][row]) &&
-            (board[1][row] == board[2][row]))
-         if(board[0][row] != ' ')
-            return 1; //we have a winner
+      if ((board[0][row] == board[1][row]) && (board[1][row] == board[2][row])){
+         if (board[0][row] == FIRST_MARK)
+            return 1; //first player win
+         if (board[0][row] == SECOND_MARK)
+            return 2; //second player win
+      }
 
    //check diagonals
-   if(   (((board[0][0] == board[1][1]) &&
-           (board[1][1] == board[2][2])) 
-          ||
-          ((board[2][0] == board[1][1]) &&
-           (board[1][1] == board[0][2]))) 
-         && 
-         (board[1][1] != ' '))
-      return 1; //we have a winner
+   if(((board[0][0] == board[1][1]) &&
+      (board[1][1] == board[2][2])) 
+      ||
+      ((board[2][0] == board[1][1]) &&
+      (board[1][1] == board[0][2]))) {
 
+      if (board[1][1] == FIRST_MARK)
+         return 1; //first player win
+      if (board[1][1] == SECOND_MARK)
+         return 2; //second player win
+   }
+        
    //check for draw
    for(row=0; row < 3; row++)
       for(col=0; col < 3; col++)

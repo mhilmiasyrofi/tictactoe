@@ -1,6 +1,9 @@
 #ifndef __board_h__
 #define __board_h__
 
+#define FIRST_MARK 'x'
+#define SECOND_MARK 'o'
+
 void drawBoard(char board[3][3]);
 void initBoard(char board[3][3]);
 char charAt(char board[3][3], int x, int y);

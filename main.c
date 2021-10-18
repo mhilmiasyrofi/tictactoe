@@ -5,6 +5,7 @@
 
 #define True 1
 
+
 void welcome() {
    char input[3];
    system("clear");
@@ -33,16 +34,20 @@ void welcome() {
    fgets(input, 3, stdin);
 }
 
+void yPrompt(){
+   char input[1];
+   input[0] = FIRST_MARK;
+   do {
+      printf("Tulis 'y' untuk kembali ke menu utama ...\n");
+      scanf("%s", input);
+   } while (input[0] != 'y');
+}
+
 void instruction() {
-   char input[1]; 
    system("clear");
    printf("<Tuliskan cara bermain>");
    printf("\n");
-   input[0] = 'x';
-   do {
-      printf("Tulis 'y' untuk melanjutkan ...\n");
-      scanf("%s", input);
-   } while (input[0] != 'y');
+   yPrompt();
 }
 
 int initPlayers(){
@@ -73,7 +78,7 @@ int play() {
    char board[3][3];
    char input[3];
    int moveTo;
-   int turn = 0;
+   int turn = 0, board_state;
    char player_mark;
    char first_player[32];
    char second_player[32];
@@ -85,7 +90,7 @@ int play() {
    scanf("%s", first_player);
    if (player_num > 1) {
       printf("Masukanan nama player 2 = ");
-      scanf("%s\n", second_player);
+      scanf("%s", second_player);
    } else {
       printf("Anda bermain dengan komputer\n");
       strncpy(second_player, "Computer", 32);
@@ -97,13 +102,19 @@ int play() {
       system("clear");
       drawBoard(board);
 
-      if (state(board) == 1) {
-         printf("\nWinner!\n");
+      board_state = state(board);
+      
+      if (board_state == 1) {
+         printf("%s wins!!!!\n", first_player);
+         yPrompt();
          return 0;
-      }
-
-      if (state(board) == -1) {
+      } else if (board_state == 2) {
+         printf("%s wins!!!!\n", second_player);
+         yPrompt();
+         return 0;
+      } else if (board_state == -1) {
          printf("\nDraw!\n");
+         yPrompt();
          return 0;
       }
 
@@ -121,7 +132,7 @@ int play() {
          }
       }
 
-      player_mark = (turn % 2) ? 'o' : 'x';
+      player_mark = (turn % 2) ? SECOND_MARK : FIRST_MARK;
       if (mv(board, moveTo, player_mark))
          turn++;
 
