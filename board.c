@@ -1,11 +1,10 @@
-#include<stdio.h>
+#include <stdio.h>
 #include "board.h"
 
 /*
  * Given a board, this function draws it to the screen
  */
-void drawBoard(char board[3][3])
-{
+void drawBoard(char board[3][3]) {
    int row, col;
 
    printf("\n");
@@ -24,8 +23,7 @@ void drawBoard(char board[3][3])
  * Once you allocate a board, immediately call this function.
  * It sets every character in the board to ' '.
  */
-void initBoard(char board[3][3])
-{
+void initBoard(char board[3][3]) {
    int i,j;
 
    for(i=0; i<3; i++)
@@ -37,16 +35,14 @@ void initBoard(char board[3][3])
  * Given a board, return the characer with coordinates (zero indexed)
  * <x,y> (or <col, row> if you prefer to think of it that way)
  */
-char charAt(char board[3][3], int x, int y)
-{
+char charAt(char board[3][3], int x, int y) {
    if( x > 2 || x < 0 || y > 2 || y < 0)
       return (char) 0;
    else
       return board[x][y];
 }
 
-int movexy(char board[3][3], int x, int y, char c)
-{
+int movexy(char board[3][3], int x, int y, char c) {
    if(isMoveLegal(board, x, y)){
       board[x][y] = c;
       return 1;
@@ -64,13 +60,11 @@ int movexy(char board[3][3], int x, int y, char c)
  *  4  5  6
  *  7  8  9
  */
-int mv(char board[3][3], int x, char c)
-{
-   movexy(board, (x - 1) % 3, (x - 1) / 3, c);
+int mv(char board[3][3], int x, char c) {
+   return movexy(board, (x - 1) % 3, (x - 1) / 3, c);
 }
 
-int isMoveLegal(char board[3][3], int x, int y)
-{
+int isMoveLegal(char board[3][3], int x, int y) {
    return charAt(board, x, y) == ' ';
 }
 
@@ -82,8 +76,7 @@ int isMoveLegal(char board[3][3], int x, int y)
  * -1: There is a draw
  *  0: Keep playing
  */
-int state(char board[3][3])
-{
+int state(char board[3][3]) {
    int row, col, i;
 
    //check colums
