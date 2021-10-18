@@ -1,8 +1,8 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "board.h"
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
    char board[3][3];
    char input[3];
    int moveTo;
